@@ -1,0 +1,320 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-08-25T20:02:52.278Z",
+  "__export_source": "insomnia.desktop.app:v9.3.3",
+  "resources": [
+    {
+      "_id": "req_2ee2d63d9eba470c936191068ff610c8",
+      "parentId": "fld_61ab615e0b9142fd83c047420527311a",
+      "modified": 1724552039862,
+      "created": 1724551774861,
+      "url": "http://localhost:4000/produtos/",
+      "name": "Atualizar produto",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"id\":\"1\",\n\t\"name\":\"homem da arana\"\n\t\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1724551774861,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_61ab615e0b9142fd83c047420527311a",
+      "parentId": "wrk_bbeea95cc4844185b721ad732f09823f",
+      "modified": 1724616003749,
+      "created": 1724543249382,
+      "name": "Ecommerce - SENAI",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1724543249382,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_bbeea95cc4844185b721ad732f09823f",
+      "parentId": null,
+      "modified": 1723092995223,
+      "created": 1723092995223,
+      "name": "My Collection",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_6c64b2b2e0c34c5f9c9ced97d6c49921",
+      "parentId": "fld_61ab615e0b9142fd83c047420527311a",
+      "modified": 1724561730313,
+      "created": 1724550760729,
+      "url": "http://localhost:4000/produtos/",
+      "name": "Criar produto",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\":\"pider man4ee\",\n\t\"price\":\"200\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1724550760729,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_41c9114133c04aa8897f5270b7266a3b",
+      "parentId": "fld_61ab615e0b9142fd83c047420527311a",
+      "modified": 1724551443647,
+      "created": 1724548717904,
+      "url": "http://localhost:4000/produtos/1",
+      "name": "Deletar produto",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1724548717904,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_980d0c786df54b3dbf832ffd9b34e99f",
+      "parentId": "fld_61ab615e0b9142fd83c047420527311a",
+      "modified": 1724546082036,
+      "created": 1724545762303,
+      "url": "http://localhost:4000/produtos/pesquisar/",
+      "name": "New Request",
+      "description": "",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": ""
+      },
+      "parameters": [
+        {
+          "id": "pair_2d56241ec7f24dcb9c178e3195ff6b75",
+          "name": "search",
+          "value": "kent",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "id": "pair_7c6f838db84e4d9aa7de4bdd61b6e273",
+          "name": "",
+          "value": "",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1724545762303,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_da4428e8784441f5b7d4f1d3a6e53055",
+      "parentId": "fld_61ab615e0b9142fd83c047420527311a",
+      "modified": 1724545758925,
+      "created": 1724545561561,
+      "url": "http://localhost:4000/produtos/filtrar/menorPreco",
+      "name": "Filtrar produtos por menor preço",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1724545561561,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_c093fbf015b0460ba33f2ef39aeb02e4",
+      "parentId": "fld_61ab615e0b9142fd83c047420527311a",
+      "modified": 1724545546916,
+      "created": 1724545239967,
+      "url": "http://localhost:4000/produtos/filtrar/maiorPreco",
+      "name": "Filtrar produtos por maior preço",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1724545239967,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6e6a1c65bdff47b4b05046854efb3786",
+      "parentId": "fld_61ab615e0b9142fd83c047420527311a",
+      "modified": 1724545228596,
+      "created": 1724545204082,
+      "url": "http://localhost:4000/produtos/1",
+      "name": "Resgatar produto por id",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1724545204082,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_25f63f11ecac41fc82cae1665473ac88",
+      "parentId": "fld_61ab615e0b9142fd83c047420527311a",
+      "modified": 1724545200024,
+      "created": 1724543287884,
+      "url": "http://localhost:4000/produtos/",
+      "name": "Resgatar todos os produtos",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "insomnia/9.3.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1724543287884,
+      "isPrivate": false,
+      "pathParameters": [],
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_f99e57dfdd8365b5a21d6821c43b4862362c2935",
+      "parentId": "wrk_bbeea95cc4844185b721ad732f09823f",
+      "modified": 1723092995224,
+      "created": 1723092995224,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1723092995224,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_f99e57dfdd8365b5a21d6821c43b4862362c2935",
+      "parentId": "wrk_bbeea95cc4844185b721ad732f09823f",
+      "modified": 1723092995225,
+      "created": 1723092995225,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    }
+  ]
+}
