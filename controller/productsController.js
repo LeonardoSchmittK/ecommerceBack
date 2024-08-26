@@ -143,8 +143,12 @@ class ProductsController {
         res.status(404).send("O id não corresponde a nenhum produto!");
         return;
       }
-
-      data.superheroes[idFound] = productToUpdate;
+      if (productToUpdate?.name) {
+        data.superheroes[idFound].name = productToUpdate.name;
+      }
+      if (productToUpdate?.price) {
+        data.superheroes[idFound].price = productToUpdate.price;
+      }
 
       await writeJSONFile(database, data);
 
@@ -153,34 +157,6 @@ class ProductsController {
       console.log("Não foi possível criar produto: " + e);
       res.status(500).send("Não foi possível criar produto... \nERRO:" + e);
     }
-  }
-
-  async show(req, res) {
-    return res.json();
-  }
-
-  async edit(req, res) {
-    return res.json();
-  }
-
-  async update(req, res) {
-    return res.json();
-  }
-
-  async destroy(req, res) {
-    return res.json();
-  }
-
-  async view(req, res) {
-    return res.json();
-  }
-
-  async grid(req, res) {
-    return res.json();
-  }
-
-  async form(req, res) {
-    return res.json();
   }
 }
 
