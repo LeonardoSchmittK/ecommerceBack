@@ -26,7 +26,7 @@ class ProductsController {
 
     return productFound
       ? res.status(200).json(productFound)
-      : res.status(404).send("Nenhum produto foi encontrado com o id " + _id);
+      : res.status(400).send("Nenhum produto foi encontrado com o id " + _id);
   }
 
   async getProductsByLowerPrice(req, res) {

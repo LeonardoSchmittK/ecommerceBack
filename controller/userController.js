@@ -62,7 +62,7 @@ class UserController {
       const filteredUsers = data.users.filter((user) => user.id !== _id);
 
       if (filteredUsers.length === data.users.length) {
-        res.status(404).send(`Não há usuário para remover com o id ${_id}`);
+        res.status(400).send(`Não há usuário para remover com o id ${_id}`);
         return;
       }
 
@@ -132,7 +132,7 @@ class UserController {
       });
 
       if (idFound === null) {
-        res.status(404).send("O id não corresponde a nenhum usuário!");
+        res.status(400).send("O id não corresponde a nenhum usuário!");
         return;
       }
       if (userToUpdate?.name) {
