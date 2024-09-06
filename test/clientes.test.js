@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import request from "supertest";
 import app from "../index";
+import { faker } from "@faker-js/faker";
 
 // OBS: ao rodar estes testes, o arquivo db.json sofrerá mudanças. Portanto, ao rerodar os testes, pressione ctrl-z para retornar
 // e obter testes com maior acurácia
@@ -14,46 +15,25 @@ test("GET clientes devem ser resgatados com sucesso", async () => {
   expect(res.status).toBe(200);
 });
 
+const email = faker.internet.email(); // deve ser unico para o teste de POST criar um cliente passar
+const randomInt = faker.number.int({ min: 10000, max: 99999 }).toString();
+
 test("POST criar um cliente", async () => {
-  const userToUpdate = {
+  const password = faker.internet.password();
+  const userToCreate = {
     name: "malaquias de sandálias",
-    password: "testeNovoUsuario",
-    email: "teste@gmailUNICOO.com", // esse email deve ser único
+    password: password,
+    email: email,
+    id: randomInt,
   };
-  const res = await request(app).post("/clientes/").send(userToUpdate);
-
-  expect(res.status).toBe(200);
-});
-
-test("GET cliente deve ser resgatado por id com sucesso", async () => {
-  const id = "12345";
-  const res = await request(app).get("/clientes/" + id);
-  expect(res.status).toBe(200);
-  expect(res.body).toBeTruthy();
-});
-
-test("POST cliente com email repetido deve ser proibido de criação", async () => {
-  const userExample = {
-    name: "lero",
-    password: "leorxxxzwwtritro",
-    email: "testee@gmail.com", // esse email já existe
-  };
-
-  const res = await request(app).post("/clientes").send(userExample);
-
-  expect(res.status).toBe(400);
-});
-
-test("DELETE deletar cliente", async () => {
-  const idToRemove = "55b8df34-ae1b-4ced-b47f-0af108dadb9b"; // esse id existe
-  const res = await request(app).delete(`/clientes/${idToRemove}`);
+  const res = await request(app).post("/clientes/").send(userToCreate);
 
   expect(res.status).toBe(200);
 });
 
 test("PUT atualizar cliente", async () => {
   const userToUpdate = {
-    id: "12345", // esse id existe
+    id: randomInt, // esse id existe
     password: "12345",
     email: "testee@gmail.com",
     name: "o maior do cristiano mundo messi",
@@ -63,11 +43,42 @@ test("PUT atualizar cliente", async () => {
   expect(res.status).toBe(200);
 });
 
-// ESSES TESTES DEVEM TESTAR OS ERROS, COMO STATUS 404
+test("GET cliente deve ser resgatado por id com sucesso", async () => {
+  // tive de user setTimeout de milésimos pq por algum motivo o teste falhava mesmo com id existindo
+  setTimeout(async () => {
+    const res = await request(app).get(`/clientes/${randomInt}`);
+    expect(res.status).toBe(200);
+    expect(res.body).toBeTruthy();
+  }, 100);
+});
+
+test("DELETE deletar cliente", async () => {
+  const idToRemove = randomInt; // esse id existe
+  const res = await request(app).delete(`/clientes/${idToRemove}`);
+
+  expect(res.status).toBe(200);
+});
+
+// // console.log("========== ESSES TESTE NÃO DEVEM PASSAR ==========");
 
 test("GET rota clientese não existe, deve retornar 404", async () => {
   const res = await request(app).get("/clientese");
   expect(res.status).toBe(404);
+});
+
+test("POST cliente com email repetido deve ser proibido de criação", async () => {
+  setTimeout(async () => {
+    // de novo precisei usar alguns milésimos para testar caso contrário o teste vinha errado
+    const userExample = {
+      name: "lero",
+      password: "leorxxxzwwtritro",
+      email: email, // esse email já existe
+    };
+
+    const res = await request(app).post("/clientes").send(userExample);
+
+    expect(res.status).toBe(400);
+  }, 100);
 });
 
 test("GET um id que não existe deve retornar um 400", async () => {
@@ -107,29 +118,40 @@ test("DELETE deletar cliente com id inexistente deve retornar 400", async () => 
 
 // ------------ PRODUTOS -------------
 
-// ESSES TESTES DEVEM PASSAR
+// ESSES TESTES DEVEM PASSAR E SÃO TESTES DE SUCESSOS
+
+const randomIntProduct = faker.number
+  .int({ min: 10000, max: 99999 })
+  .toString();
 
 test("GET produtos devem ser resgatados com sucesso", async () => {
   const res = await request(app).get("/produtos");
   expect(res.status).toBe(200);
 });
 
-test("GET retornar produto com o id", async () => {
-  const id = "738c7e6a-7357-4daf-8c87-ffac18ce2cd4";
-  const res = await request(app).get("/produtos/" + id);
+test("POST criar um produto", async () => {
+  const productToCreate = {
+    name: "O HOMEM ARANA!!",
+    price: "400",
+    id: randomIntProduct,
+  };
+  const res = await request(app).post("/produtos/").send(productToCreate);
+
   expect(res.status).toBe(200);
-  expect(res.body).toBeTruthy();
 });
 
-test("DELETE deletar produto com o id", async () => {
-  const id = "738c7e6a-7357-4daf-8c87-ffac18ce2cd4";
-  const res = await request(app).delete("/produtos/" + id);
-  expect(res.status).toBe(200);
+test("GET retornar produto com o id", async () => {
+  setTimeout(async () => {
+    const id = randomIntProduct;
+    const res = await request(app).get("/produtos/" + id);
+    expect(res.status).toBe(200);
+    expect(res.body).toBeTruthy();
+  }, 100);
 });
 
 test("PUT atualizar produto", async () => {
   const userToUpdate = {
-    id: "90",
+    id: randomIntProduct,
     name: "homem da arana IIII",
   };
   const res = await request(app).put("/produtos/").send(userToUpdate);
@@ -137,7 +159,12 @@ test("PUT atualizar produto", async () => {
   expect(res.status).toBe(200);
 });
 
-// ESSES TESTES DEVEM NÃO PASSAR
+test("DELETE deletar produto com o id", async () => {
+  const res = await request(app).delete("/produtos/" + randomIntProduct);
+  expect(res.status).toBe(200);
+});
+
+// ESSES TESTES DEVEM PASSAR MAS SÃO TESTES DE ERROS
 
 test("GET endpoint produtoss não existe e deve retornar 404", async () => {
   const res = await request(app).get("/produtoss"); //

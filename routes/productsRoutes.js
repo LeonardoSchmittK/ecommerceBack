@@ -22,11 +22,12 @@ productRoutes.get(
 );
 
 // POST
-productRoutes.post(
-  "/",
-  upload.single("image"),
-  ProductsController.createProduct
-);
+// productRoutes.post(
+//   "/",
+//   upload.single("image"),
+//   ProductsController.createProduct
+// );
+productRoutes.post("/", ProductsController.createProduct);
 // UPDATE
 
 productRoutes.put("/", ProductsController.updateProduct);

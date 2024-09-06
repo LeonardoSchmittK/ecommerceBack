@@ -39,7 +39,7 @@ class UserController {
         return res.status(400).send("Usuário já existe");
       }
 
-      userToCreate.id = v4();
+      userToCreate.id = userToCreate.id ? userToCreate.id : v4();
       userToCreate.password = await bcryptjs.hashSync(
         userToCreate.password,
         10
