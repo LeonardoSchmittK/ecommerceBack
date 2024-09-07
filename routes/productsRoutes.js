@@ -1,8 +1,8 @@
 import { Router } from "express";
 import multer from "multer";
-import ProductsController from "../controller/productsController.js"; // Ensure the file path and extension are correct
+import ProductsController from "../controller/productsController.js";
 
-const productRoutes = Router(); // It's better to use `Router()` instead of `new Router()`
+const productRoutes = Router();
 const upload = multer();
 
 // GET
@@ -22,12 +22,11 @@ productRoutes.get(
 );
 
 // POST
-// productRoutes.post(
-//   "/",
-//   upload.single("image"),
-//   ProductsController.createProduct
-// );
-productRoutes.post("/", ProductsController.createProduct);
+productRoutes.post(
+  "/",
+  upload.single("image"),
+  ProductsController.createProduct
+);
 // UPDATE
 
 productRoutes.put("/", ProductsController.updateProduct);

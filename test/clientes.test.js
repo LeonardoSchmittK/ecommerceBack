@@ -3,12 +3,12 @@ import request from "supertest";
 import app from "../index";
 import { faker } from "@faker-js/faker";
 
-// OBS: ao rodar estes testes, o arquivo db.json sofrerá mudanças. Portanto, ao rerodar os testes, pressione ctrl-z para retornar
-// e obter testes com maior acurácia
+// comando para rodar os testes:
+// npx vitest
 
 // --------------- CLIENTES ---------------
 
-// ESSES TESTES DEVEM PASSAR
+// TESTES PARA SUCESSO
 
 test("GET clientes devem ser resgatados com sucesso", async () => {
   const res = await request(app).get("/clientes");
@@ -59,7 +59,7 @@ test("DELETE deletar cliente", async () => {
   expect(res.status).toBe(200);
 });
 
-// // console.log("========== ESSES TESTE NÃO DEVEM PASSAR ==========");
+// ESSES TESTES DEVEM PASSAR MAS SÃO TESTES DE ERROS
 
 test("GET rota clientese não existe, deve retornar 404", async () => {
   const res = await request(app).get("/clientese");
@@ -118,11 +118,12 @@ test("DELETE deletar cliente com id inexistente deve retornar 400", async () => 
 
 // ------------ PRODUTOS -------------
 
-// ESSES TESTES DEVEM PASSAR E SÃO TESTES DE SUCESSOS
+// TESTES DE SUCESSOS
 
 const randomIntProduct = faker.number
   .int({ min: 10000, max: 99999 })
   .toString();
+const nameProduct = faker.commerce.productName();
 
 test("GET produtos devem ser resgatados com sucesso", async () => {
   const res = await request(app).get("/produtos");
@@ -131,7 +132,7 @@ test("GET produtos devem ser resgatados com sucesso", async () => {
 
 test("POST criar um produto", async () => {
   const productToCreate = {
-    name: "O HOMEM ARANA!!",
+    name: nameProduct,
     price: "400",
     id: randomIntProduct,
   };
@@ -164,11 +165,44 @@ test("DELETE deletar produto com o id", async () => {
   expect(res.status).toBe(200);
 });
 
+test("GET retornar os produtos por preço do menor para o maior e verificar se estão ordenados como tal", async () => {
+  const res = await request(app).get("/produtos/filtrar/menorPreco");
+  expect(res.status).toBe(200);
+  expect(Number(res.body[0].price)).toBeLessThanOrEqual(
+    Number(res.body[1].price)
+  );
+});
+
+test("GET retornar os produtos por preço do maior para o menor e verificar se estão ordenados como tal", async () => {
+  const res = await request(app).get("/produtos/filtrar/maiorPreco");
+  expect(res.status).toBe(200);
+  expect(Number(res.body[0].price)).toBeGreaterThanOrEqual(
+    Number(res.body[1].price)
+  );
+});
+
+test("GET retornar produto através de pesquisa por nome", async () => {
+  setTimeout(async () => {
+    const textToSearch = nameProduct.slice(0, 3); // pesquisar apenas o início deve funcionar
+    const res = await request(app).get("/produtos/pesquisar" + textToSearch);
+    expect(res.status).toBe(200);
+    expect(res.body).toBeTruthy();
+  }, 100);
+});
+
 // ESSES TESTES DEVEM PASSAR MAS SÃO TESTES DE ERROS
 
 test("GET endpoint produtoss não existe e deve retornar 404", async () => {
   const res = await request(app).get("/produtoss"); //
   expect(res.status).toBe(404);
+});
+
+test("GET retornar produto através de pesquisa por nome inexistente deve retornar 404", async () => {
+  setTimeout(async () => {
+    const textToSearch = "ISSONAODEVEFUNCIONARNUNCAQUEISSOCARA"; // esse nome de produto não existe
+    const res = await request(app).get("/produtos/pesquisar" + textToSearch);
+    expect(res.status).toBe(404);
+  }, 100);
 });
 
 test("GET id do produto não existe e deve retornar 404", async () => {
