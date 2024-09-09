@@ -44,18 +44,14 @@ test("PUT atualizar cliente", async () => {
 });
 
 test("GET cliente deve ser resgatado por id com sucesso", async () => {
-  // tive de user setTimeout de milésimos pq por algum motivo o teste falhava mesmo com id existindo
-  setTimeout(async () => {
-    const res = await request(app).get(`/clientes/${randomInt}`);
-    expect(res.status).toBe(200);
-    expect(res.body).toBeTruthy();
-  }, 100);
+  const res = await request(app).get(`/clientes/${12345}`); // esse id existe
+  expect(res.status).toBe(200);
+  expect(res.body).toBeTruthy();
 });
 
 test("DELETE deletar cliente", async () => {
   const idToRemove = randomInt; // esse id existe
   const res = await request(app).delete(`/clientes/${idToRemove}`);
-
   expect(res.status).toBe(200);
 });
 
@@ -67,18 +63,15 @@ test("GET rota clientese não existe, deve retornar 404", async () => {
 });
 
 test("POST cliente com email repetido deve ser proibido de criação", async () => {
-  setTimeout(async () => {
-    // de novo precisei usar alguns milésimos para testar caso contrário o teste vinha errado
-    const userExample = {
-      name: "lero",
-      password: "leorxxxzwwtritro",
-      email: email, // esse email já existe
-    };
+  const userExample = {
+    name: "lero",
+    password: "leorxxxzwwtritro",
+    email: "teste@gmail.com", // esse email já existe
+  };
 
-    const res = await request(app).post("/clientes").send(userExample);
+  const res = await request(app).post("/clientes").send(userExample);
 
-    expect(res.status).toBe(400);
-  }, 100);
+  expect(res.status).toBe(400);
 });
 
 test("GET um id que não existe deve retornar um 400", async () => {
@@ -148,6 +141,12 @@ test("GET retornar produto com o id", async () => {
   expect(res.body).toBeTruthy();
 });
 
+test("GET retornar produto através de pesquisa por nome", async () => {
+  const res = await request(app).get(`/produtos/pesquisar/${"pider"}`); // pider existe
+  expect(res.status).toBe(200);
+  expect(res.body).toBeTruthy();
+});
+
 test("PUT atualizar produto", async () => {
   const userToUpdate = {
     id: randomIntProduct,
@@ -179,28 +178,17 @@ test("GET retornar os produtos por preço do maior para o menor e verificar se e
   );
 });
 
-test("GET retornar produto através de pesquisa por nome", async () => {
-  setTimeout(async () => {
-    const textToSearch = nameProduct.slice(0, 3); // pesquisar apenas o início deve funcionar
-    const res = await request(app).get("/produtos/pesquisar" + textToSearch);
-    expect(res.status).toBe(200);
-    expect(res.body).toBeTruthy();
-  }, 100);
-});
-
 // ESSES TESTES DEVEM PASSAR MAS SÃO TESTES DE ERROS
 
 test("GET endpoint produtoss não existe e deve retornar 404", async () => {
-  const res = await request(app).get("/produtoss"); //
+  const res = await request(app).get("/produtoss");
   expect(res.status).toBe(404);
 });
 
 test("GET retornar produto através de pesquisa por nome inexistente deve retornar 404", async () => {
-  setTimeout(async () => {
-    const textToSearch = "ISSONAODEVEFUNCIONARNUNCAQUEISSOCARA"; // esse nome de produto não existe
-    const res = await request(app).get("/produtos/pesquisar" + textToSearch);
-    expect(res.status).toBe(404);
-  }, 100);
+  const textToSearch = "ISSONAODEVEFUNCIONARNUNCAQUEISSOCARA"; // esse nome de produto não existe
+  const res = await request(app).get("/produtos/pesquisar" + textToSearch);
+  expect(res.status).toBe(404);
 });
 
 test("GET id do produto não existe e deve retornar 404", async () => {
