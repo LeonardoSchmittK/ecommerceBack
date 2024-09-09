@@ -108,7 +108,7 @@ class ProductsController {
           return;
         }
 
-        productToCreate.id ? productToCreate.id : v4();
+        productToCreate.id = productToCreate.id ? productToCreate.id : v4();
         productToCreate.imageUrl = base64Image;
         productToCreate.imageName = req.file.originalname;
         const data = await readJSONFile(database);
@@ -119,7 +119,7 @@ class ProductsController {
       } else {
         const productToCreate = req.body;
 
-        productToCreate.id ? productToCreate.id : v4();
+        productToCreate.id = productToCreate.id ? productToCreate.id : v4();
         const data = await readJSONFile(database);
         const filteredHeroes = data.superheroes.push(productToCreate);
         await writeJSONFile(database, data);

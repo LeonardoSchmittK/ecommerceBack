@@ -14,12 +14,17 @@
     {
       "name": "pider man4ee!",
       "price": "2030"
+    },
+    {
+      "name": "pider man4ee",
+      "price": "200",
+      "id": "92"
     }
   ],
   "users": [
     {
       "name": "o maior do cristiano mundo messi",
-      "password": "123456",
+      "password": "123",
       "email": "testee@gmail.com",
       "id": "d9249ce3-c887-4263-9333-8e073aee8f04"
     },
@@ -64,12 +69,6 @@
       "password": "12345",
       "email": "testee@gmail.com",
       "id": "12345"
-    },
-    {
-      "name": "lero",
-      "password": "$2a$10$l03iyebRa8t9yERKrjdwxu4smtdtLbyn.0uvl1.tCmfWRzUSqQAZO",
-      "email": "testey455rxxwww4244r@gmail.com",
-      "id": "d50192ac-3958-4beb-a41c-fd46e93b3be4"
     },
     {
       "name": "malaquias de sandálias",
@@ -154,6 +153,12 @@
       "password": "$2a$10$h/6ztiRoAjkctapiNkvFE.INMKgswUe4JYFUFbPyxgcR2l.0zHI9S",
       "email": "Marisol30@hotmail.com",
       "id": "0d7185e7-897e-4f79-8392-a4ed8998232d"
+    },
+    {
+      "name": "malaquias de sandálias II",
+      "password": "$2a$10$IppSgkHcvpC1RPLjbtFCL.wYDARUPcOh1Aarrz15STnytjWBWe4x6",
+      "email": "teste@gmail.com",
+      "id": "fc3b2070-1031-49ab-9ceb-e3284c56b786"
     }
   ]
 }

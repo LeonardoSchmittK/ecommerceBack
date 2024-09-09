@@ -142,12 +142,10 @@ test("POST criar um produto", async () => {
 });
 
 test("GET retornar produto com o id", async () => {
-  setTimeout(async () => {
-    const id = randomIntProduct;
-    const res = await request(app).get("/produtos/" + id);
-    expect(res.status).toBe(200);
-    expect(res.body).toBeTruthy();
-  }, 100);
+  const id = randomIntProduct;
+  const res = await request(app).get("/produtos/pesquisarId/" + 92); // 92 existe como id no db
+  expect(res.status).toBe(200);
+  expect(res.body).toBeTruthy();
 });
 
 test("PUT atualizar produto", async () => {
@@ -207,7 +205,7 @@ test("GET retornar produto através de pesquisa por nome inexistente deve retorn
 
 test("GET id do produto não existe e deve retornar 404", async () => {
   const id = "1234445"; // esse id não existe
-  const res = await request(app).get("/produtos/" + id);
+  const res = await request(app).get("/produtos/pesquisarId" + id);
   expect(res.status).toBe(404);
 });
 
