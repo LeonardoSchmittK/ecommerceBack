@@ -1,42 +1,25 @@
-var addStrings = function (num1, num2) {
-  let greatestQuantity;
-  let smallestQuantity;
-  let greatestNum;
-  let smallestNum;
-
-  if (num1.length > num2.length) {
-    greatestQuantity = num1.length - 1;
-    smallestQuantity = num2.length - 1;
-    greatestNum = num1;
-    smallestNum = num2;
-  } else {
-    greatestQuantity = num2.length - 1;
-    smallestQuantity = num1.length - 1;
-    greatestNum = num2;
-    smallestNum = num1;
-  }
-
-  let res = [];
-
-  let sum = 0;
-  let rest = 0;
-  for (let i = greatestQuantity; i >= 0; --i) {
-    sum =
-      Number(greatestNum[greatestQuantity] || 0) +
-      Number(smallestNum[smallestQuantity] || 0) +
-      rest +
-      "";
-    res.push(sum.split(""));
-    smallestQuantity--;
-    greatestQuantity--;
-
-    if (res.length > 1) {
-      rest = res[1];
+var mergeAlternately = function (word1, word2) {
+  let merged = "";
+  let counter1 = 0;
+  let counter2 = 0;
+  for (let i = 0; i < word1.length + word2.length; ++i) {
+    if (i % 2 == 0) {
+      merged += word1[counter1] || word2.slice(counter2, word2.length);
+      if (!word1[counter1]) {
+        break;
+      }
+      counter1++;
     } else {
-      rest = 0;
+      merged += word2[counter2] || word1.slice(counter1, word1.length);
+      if (!word2[counter2]) {
+        break;
+      }
+      counter2++;
     }
   }
-  return res.reverse().join("");
+
+  return merged;
 };
 
-console.log(addStrings("456", "77"));
+// console.log(mergeAlternately("abc", "pqr"));
+console.log(mergeAlternately("ab", "pqrs"));

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Primeira página</title>
+    <style>
+      * {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      body {
+        background-repeat: no-repeat;
+        background-size: auto;
+        padding-top: 1em;
+      }
+
+      .main-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table,
+      tr,
+      td {
+        border: 1px solid gray;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd55;
+      }
+
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+      }
+
+      input,
+      textarea {
+        padding: 0.5em;
+        border-radius: 0.425em;
+        outline: 0;
+        border: 1px solid grey;
+      }
+
+      textarea {
+        resize: none;
+      }
+
+      button {
+        outline: 0;
+        border: 0;
+        padding: 0.5em;
+        border-radius: 0.425em;
+        transition: 120ms linear;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      button:hover {
+        background-color: #77e9c3;
+        transition: 120ms linear;
+      }
+
+      .btn-enviar {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.425em;
+        font-size: 1.5em;
+        background-color: aquamarine;
+      }
+
+      .btn-enviar svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .imagem-dia {
+        border-radius: 0.425em;
+      }
+
+      a {
+        text-decoration: none;
+        color: #114c4c;
+      }
+
+      .imagem-dia-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
+        margin-bottom: 1em;
+        overflow: hidden;
+      }
+
+      .imagem-dia-section button {
+        width: 100%;
+      }
+
+      figure {
+        width: 100%;
+        height: 800px;
+        overflow: hidden;
+        border-radius: 0.425em;
+        display: inline-block;
+        position: relative;
+      }
+
+      figure:hover img {
+        transform: scale(1.11);
+        transition: 120ms linear;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.425em;
+        transition: 120ms linear;
+        border-radius: 0.425em;
+      }
+
+      footer {
+        margin: 2em 0;
+      }
+
+      .actor-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      #steve-carrell {
+        background-image: url("https://s2-quem.glbimg.com/KlDx2bG4iGZNnFeIw6aisZ5bwQU=/fit-in/750x415/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_b0f0e84207c948ab8b8777be5a6a4395/internal_photos/bs/2024/n/i/qMRkLWRQiMMUGUmsHRDw/steve-carell.jpg");
+      }
+
+      #ian-mckellen {
+        background-image: url("https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTJBt1LIH_1z6d_5zFa8U0AgO5DOzx7eJDYEkQMwujuE1XrGgbet_Gy1XY9gou0qk7TfPL2FWU6ves8Vss");
+      }
+
+      #tom-hanks {
+        background-image: url("https://f001.backblazeb2.com/file/papocine/2018/07/20180705-tom-hanks.jpg");
+      }
+    </style>
+  </head>
+  <body>
+    <section class="main-section">
+      <div>
+        <header class="cabecalho">Leo's Blog</header>
+        <h1>Filmes favoritos</h1>
+        <p>Esta é minha lista de filmes favoritos:</p>
+        <ul>
+          <li>O Senhor dos Anéis</li>
+          <li>Little Miss Sunshine</li>
+          <li>O Resgate do Suldado Ryan</li>
+        </ul>
+        <p>Aqui está uma tabela dos filmes:</p>
+        <table>
+          <tr class="cabecalho-tabela">
+            <th>Título</th>
+            <th>Lançamento</th>
+            <th>Ator principal</th>
+          </tr>
+          <tr>
+            <th>Senhor dos Anéis</th>
+            <th>2003</th>
+            <th>
+              Ian McKellen
+              <div
+                class="actor-icon"
+                id="ian-mckellen"
+                alt="Ian McKellen"
+              ></div>
+            </th>
+          </tr>
+          <tr>
+            <th>Little Miss Sunshine</th>
+            <th>2006</th>
+            <th>
+              Steve Carrell
+              <div
+                class="actor-icon"
+                id="steve-carrell"
+                alt="steve-carrell"
+              ></div>
+            </th>
+          </tr>
+          <tr>
+            <th>O Resgate do Suldado Ryan</th>
+            <th>1998</th>
+            <th>
+              Tom Hanks
+              <div class="actor-icon" id="tom-hanks" alt="Tom Hanks"></div>
+            </th>
+          </tr>
+        </table>
+        <h1>Deixe seu comentário:</h1>
+
+        <form action="">
+          <label for="nome">Nome:</label>
+          <input name="nome" type="text" />
+          <label for="comentario">Comentário</label>
+          <textarea name="comentario" id="" cols="30" rows="10"></textarea>
+          <button class="btn-enviar" type="submit">
+            Enviar
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+              />
+            </svg>
+          </button>
+        </form>
+        <h1>Imagem do dia</h1>
+        <section class="imagem-dia-section">
+          <figure>
+            <img
+              class="imagem-dia"
+              src="https://i.pinimg.com/564x/31/ec/9f/31ec9fd675cabda6cb30cd3f31854930.jpg"
+              alt="frodo baggins, Frodo, Bolseiro"
+            />
+          </figure>
+
+          <button>
+            <a
+              href="https://www.amazon.com.br/Box-Trilogia-Senhor-dos-An%C3%A9is/dp/8595086354"
+              >Link Amazon</a
+            >
+          </button>
+        </section>
+        <footer>made with ❤️</footer>
+      </div>
+    </section>
+  </body>
+</html>

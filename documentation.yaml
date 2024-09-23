@@ -1,0 +1,356 @@
+openapi: 3.0.3
+info:
+  title: API Back-End E-Commerce - OpenAPI 3.0
+  description: |-
+    Esta é uma documentação de API que visa destacar as rotas de clientes, produtos e auth. Foi usado para testes o JEST e Supertest. Além disso, JWT Tokens para autenticação, cookies e nodejs junto de express.
+  contact:
+    email: leonardo_kreuch@estudante.sesisenai.org.br
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit
+  version: 1.0.11
+servers:
+  - url: https://localhost:4000
+tags:
+  - name: produtos
+    description: Rotas e funções para produtos
+  - name: clientes
+    description: Rotas e funções para autenticação
+  - name: auth
+    description: Rotas e funções para clientes
+paths:
+  /produtos/filtrar/menorPreco:
+    get:
+      tags:
+        - produtos
+      summary: Elencar produtos por preço do menor para o maior
+      responses:
+        "200":
+          description: Operação bem sucedida
+        "404":
+          description: Não foi possível filtrar
+  /produtos/filtrar/maiorPreco:
+    get:
+      tags:
+        - produtos
+      summary: Elencar produtos por preço do menor para o maior
+      responses:
+        "200":
+          description: Operação bem sucedida
+        "404":
+          description: Não foi possível filtrar
+  /produtos:
+    get:
+      tags:
+        - produtos
+      summary: Resgata todos os produtos
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: "lero"
+                    password:
+                      type: string
+                      example: "$2a$10$x3V2y3o.gux.DZum3DGEKOUaPKtref.rdYj5k/hb30pcZ7gaMdCpW"
+                    email:
+                      type: string
+                      example: "Julian41@gmail.com"
+                    id:
+                      type: string
+                      example: "9fb74aab-27b5-4050-9690-23eb7a892088"
+        "500":
+          description: Erro no servidor
+    put:
+      tags:
+        - produtos
+      summary: Atualizar um produto
+      requestBody:
+        required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              price:
+                type: number
+      responses:
+        "200":
+          description: Produto atualizado
+        "404":
+          description: O id não corresponde a nenhum produto
+    post:
+      tags:
+        - produtos
+      summary: Criar novo produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "pider man4ee"
+                price:
+                  type: number
+                  example: 200
+              required:
+                - name
+                - price
+      responses:
+        "200":
+          description: Operação bem sucedida
+        "400":
+          description: Não foi possível criar produto, certifique-se que o produto tenha um nome e um preço
+        "500":
+          description: Não foi possível criar produto... \nERRO
+
+  /produtos/{id}:
+    get:
+      tags:
+        - produtos
+      summary: Resgata um produto pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do produto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Produto encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  password:
+                    type: string
+                  email:
+                    type: string
+                  id:
+                    type: string
+        "400":
+          description: Nenhum produto foi encontrado com o id
+
+    delete:
+      tags:
+        - produtos
+      summary: Deletar um produto pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do produto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Produto deletado
+        "404":
+          description: Não há produto para remover com o id
+  /clientes:
+    get:
+      tags:
+        - clientes
+      summary: Resgata todos os usuários
+      responses:
+        "200":
+          description: Operação bem sucedida
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+        "500":
+          description: Erro no servidor
+
+    post:
+      tags:
+        - clientes
+      summary: Criar novo usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "John Doe"
+                email:
+                  type: string
+                  example: "john.doe@example.com"
+                password:
+                  type: string
+                  example: "securepassword123"
+              required:
+                - name
+                - email
+                - password
+      responses:
+        "200":
+          description: Usuário criado com sucesso
+        "400":
+          description: Não foi possível criar usuário, certifique-se que o usuário tenha um nome, uma senha e um email
+        "500":
+          description: Não foi possível criar usuário, erro no servidor
+
+  /clientes/{id}:
+    get:
+      tags:
+        - clientes
+      summary: Resgata um usuário pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do usuário
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+        "400":
+          description: O id não se refere a nenhum usuário
+
+    delete:
+      tags:
+        - clientes
+      summary: Deletar um usuário pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do usuário
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Usuário deletado
+        "400":
+          description: Não há usuário para remover com o id
+        "500":
+          description: Não foi possível remover usuário, erro no servidor
+
+    put:
+      tags:
+        - clientes
+      summary: Atualizar um usuário
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID do usuário
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Usuário atualizado
+        "400":
+          description: O id não corresponde a nenhum usuário
+        "500":
+          description: Não foi possível atualizar usuário, erro no servidor
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Realiza o login do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "john.doe@example.com"
+                password:
+                  type: string
+                  example: "securepassword123"
+              required:
+                - email
+                - password
+      responses:
+        "200":
+          description: Login bem-sucedido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auth:
+                    type: boolean
+                    example: true
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        "500":
+          description: Usuário não encontrado ou erro no servidor
+
+  /auth/logout:
+    post:
+      tags:
+        - auth
+      summary: Realiza o logout do usuário
+      responses:
+        "200":
+          description: Logout bem-sucedido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "o usuario fez logout"

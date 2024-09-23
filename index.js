@@ -5,6 +5,11 @@ import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
 import dotenv from "dotenv-safe";
 import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
+
+const swaggerDocument = YAML.load("./documentation.yaml");
+
 dotenv.config();
 
 const app = express();
@@ -18,6 +23,15 @@ app.use(cookieParser());
 app.use("/produtos", productRoutes);
 app.use("/clientes", userRoutes);
 app.use("/auth", authRoutes);
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, {
+    swaggerOptions: {
+      docExpansion: "none",
+    },
+  })
+);
 
 // rodar o servidor
 

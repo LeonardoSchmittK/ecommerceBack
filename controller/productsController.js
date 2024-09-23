@@ -13,7 +13,7 @@ class ProductsController {
 
   async getProducts(req, res) {
     try {
-      return res.json(databaseJson);
+      return res.status(200).json(databaseJson);
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: "ERROR: ", error });
